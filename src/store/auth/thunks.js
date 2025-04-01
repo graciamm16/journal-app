@@ -1,8 +1,8 @@
-import { Notes } from "@mui/icons-material";
 import { loginWithEmailPassword, logoutFirebase, registerUserWithEmailPassword, signInWithGoogle } from "../../firebase/providers";
 import { loadNotes } from "../../helpers/loadNotes";
-import { setNotes } from "../journal/journalSlice";
+import { clearNotesLogout, setNotes } from "../journal";
 import { checkingCredentials, login, logout } from "./";
+
 
 export const checkingAuthentication = (email, password) => {
     return async(dispatch) => {
@@ -48,7 +48,8 @@ export const startLogout = () => {
     return async(dispatch) => {
         await logoutFirebase();
 
-        dispatch(logout({}));
+        dispatch(clearNotesLogout());
+        dispatch(logout());
     }
 }
 

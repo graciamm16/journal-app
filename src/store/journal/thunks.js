@@ -1,4 +1,4 @@
-import {doc, setDoc, collection} from 'firebase/firestore/lite';
+import {doc, deleteDoc, setDoc, collection} from 'firebase/firestore/lite';
 import { FirebaseDB } from '../../firebase/config';
 import {addNewEmptyNote, deleteNoteById, savingNewNote, setActiveNote, setPhotoToActiveNote, setSaving, updateNote} from './journalSlice';
 import { fileUpload } from '../../helpers';
@@ -74,7 +74,7 @@ export const startDeletingNote = () => {
         const {uid} = getState().auth;
         const {active: note} = getState().journal;
 
-        const docRef = doc(FirebaseDB, `${uid}/journal/notes/${note.id}`);
+        const docRef = doc(FirebaseDB, `${uid}/journal/notes/${note.id}`); //Refencia al documento apuntándolo como si quisiéramos hacer una actualización
         await deleteDoc(docRef);
 
         dispatch(deleteNoteById(note.id));
