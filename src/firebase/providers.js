@@ -15,7 +15,7 @@ export const signInWithGoogle = async() => {
             displayName, email, photoURL, uid
         }
     }catch(error){
-        // const errorCode = error.code;
+        const errorCode = error.code;
         const errorMessage = error.message;
     
         return{
